@@ -1,24 +1,35 @@
+<script>
+  console.log("starting exec");
+</script>
 <script type="module">
-const base = "https://effulgent-gumdrop-b59e10.netlify.app";
-if (!window.location.href.includes("editsubmission")){
+  console.log("middle exec");
+  const base = "https://cdn.jsdelivr.net/gh/diu-sec/coverpage-gen-blc.js/"
 
-    const { patchZipInput } = await import(
-            `${base}/blc-integration/zip_patch.js`
-            );
+  if (window.location.href.includes("editsubmission")) {
+    const {
+      patchZipInput
+    } = await import(
+      `${base}/blc-integration/zip_patch.js`
+    );
+
+    const ls = JSON.parse(localStorage.coverpage);
 
     const data = {
-Semester: "Spring 2026",
-          "Student Name": "SOMETHING SOMEONE",
-          "Student ID": "221-15-1234",
-          Batch: "TEST_TEST",
-          Section: "TEST",
-          "Course Code": "SE 236",
-          "Course Name": "Desktop And Web Programming",
-          "Course Teacher Name": "Khalid Masum",
-          Designation: "Lecturer",
-          "Submission Date": new Date().toISOString().split("T")[0]
+      Semester: ls.course.semester,
+      "Student Name": ls.student.name,
+      "Student ID": ls.student.sid,
+      Batch: "___________",
+      Section: "__________",
+      "Course Code": "SE 236",
+      "Course Name": ls.course.name,
+      "Course Teacher Name": ls.course.teacher,
+      Designation: "Lecturer",
+      "Submission Date": Date()
     };
 
     patchZipInput(`${base}/templates/coverpage.pdf`, data, true);
-}
+  }
+</script>
+<script>
+  console.log("ending exec");
 </script>
