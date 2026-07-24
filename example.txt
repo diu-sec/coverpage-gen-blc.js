@@ -1,0 +1,24 @@
+<script type="module">
+const base = "https://effulgent-gumdrop-b59e10.netlify.app";
+if (!window.location.href.includes("editsubmission")){
+
+    const { patchZipInput } = await import(
+            `${base}/blc-integration/zip_patch.js`
+            );
+
+    const data = {
+Semester: "Spring 2026",
+          "Student Name": "SOMETHING SOMEONE",
+          "Student ID": "221-15-1234",
+          Batch: "TEST_TEST",
+          Section: "TEST",
+          "Course Code": "SE 236",
+          "Course Name": "Desktop And Web Programming",
+          "Course Teacher Name": "Khalid Masum",
+          Designation: "Lecturer",
+          "Submission Date": new Date().toISOString().split("T")[0]
+    };
+
+    patchZipInput(`${base}/templates/coverpage.pdf`, data, true);
+}
+</script>
